@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import {RkButton} from 'react-native-ui-kitten';
+
 import {
     View,
     Text,
@@ -10,7 +12,8 @@ import {
 const ServiceItem = ({ title }) => {
     return (
         <View>
-            <Text style={styles.textStyle}>{title}</Text>
+          <Text style={styles.textStyle}>{title}</Text>
+          <RkButton>Click me!</RkButton>
         </View>
     )
 }
