@@ -4,6 +4,6 @@ export function getServices() {
     return new Promise((resolve, reject) => {
         setTimeout(function () {
             resolve(services.data)
-        }, 1000)
+        }, 500)
     })
 }
