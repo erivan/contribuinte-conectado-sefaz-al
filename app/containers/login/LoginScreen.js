@@ -1,18 +1,87 @@
-/* @flow */
-
 import React, { Component } from 'react';
 import {
   View,
   Text,
   TextInput,
   Image,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  TouchableOpacity,
+  Linking
 } from 'react-native';
+import { connect } from 'react-redux';
 
-export default class LoginScreen extends Component {
+import * as actions from './LoginActions'
+
+class LoginScreen extends Component {
   constructor(props) {
     super(props)
-    this.state = { login: '', passowrd: '' }
+    this.state = { login: '', authorization: null, buttonText: 'SOLICITAR AUTORIZAÇÃO', hideInputs: false, error: '', missingFields: false}
+  }
+
+  requestAuthorization() {
+    if(this.state.login === '' ) {
+      this.setState({missingFields: true});
+      return null;
+    }
+
+    const login = this.state.login;
+    this.setState({missingFields: false});
+    if(this.state.hideInputs) {
+      console.log('ahhai')
+      console.log(this.state)
+      this.props.authorize({login: login, idAutorizacao: this.state.authorization.data.idAutorizacao})
+    }else{
+      this.props.requestAuthorizationUser(login)
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps)
+     if (this.props.authorization !== nextProps.authorization) {
+         this.setState({buttonText: 'Confirmar Auteração', hideInputs: true, error: '', authorization: nextProps.authorization })
+     }
+     if (this.props.notAuthorized !== nextProps.notAuthorized) {
+       this.setState({buttonText: 'Confirmar Auteração', hideInputs: true, error:'Certifique-se que você autorizou o nosso aplicativo', authorization: this.state.authorization })
+     }
+  }
+
+  renderInputs() {
+    if (this.state.hideInputs) {
+      return null;
+    }
+
+    return <View>
+    <TextInput
+      underlineColorAndroid='rgba(0,0,0,0)'
+      style={styles.inputLogin}
+      onChangeText={(login) => this.setState({login})}
+      placeholder='Usuário'
+      value={this.state.login}
+    />
+    </View>;
+  }
+
+  openLink() {
+    Linking.openURL(this.state.authorization.data.urlAutorizacao)
+  }
+
+  renderError() {
+    if(!this.state.hideInputs) return null;
+    const msg = this.state.error !== '' ? this.state.error : 'Você deve autorizar nosso aplicativo no site da sefaz, clique para ser redirecionado' ;
+    return <View style={{ justifyContent: 'center', alignItems: 'center', height: 50, margin: 20}}>
+            <TouchableOpacity onPress={this.openLink.bind(this)}>
+            <Text style={{color: 'red', fontWeight: 'bold'}}>{msg}</Text>
+             </TouchableOpacity>
+            </View>;
+  }
+  requiredFields() {
+    if(this.state.missingFields) {
+      const msg = 'O campo usuário é obrigátorio.' ;
+      return <View style={{ justifyContent: 'center', alignItems: 'center', height: 50}}>
+              <Text style={{color: 'red', fontWeight: 'bold'}}>{msg}</Text>
+              </View>;
+    }
+
   }
 
   render() {
@@ -23,28 +92,15 @@ export default class LoginScreen extends Component {
         <Image
             style={{height: 238, width: null, resizeMode: 'stretch'}}
             source={require('./assets/logo.png')}/>
-
         </View>
 
       <View style={{ flex: 1 }}>
-          <TextInput
-            underlineColorAndroid='rgba(0,0,0,0)'
-            style={styles.inputLogin}
-            onChangeText={(login) => this.setState({login})}
-            placeholder='Usuário'
-            value={this.state.login}
-          />
-          <TextInput
-            secureTextEntry={true}
-            underlineColorAndroid='rgba(0,0,0,0)'
-            style={styles.inputLogin}
-            onChangeText={(passowrd) => this.setState({passowrd})}
-            placeholder='Senha'
-            value={this.state.passowrd}
-          />
-          <View style={styles.LoginButton}>
-            <Text style={styles.buttonText}>Submit</Text>
-          </View>
+          {this.renderInputs()}
+          <TouchableOpacity style={styles.LoginButton} onPress={this.requestAuthorization.bind(this)}>
+            <Text style={styles.buttonText}>{this.state.buttonText}</Text>
+          </TouchableOpacity>
+          {this.renderError()}
+          {this.requiredFields()}
       </View>
     </View>
     );
@@ -77,3 +133,10 @@ const styles = {
     alignSelf: 'center'
   }
 }
+
+const mapStateToProps = (state) => ({
+    authorization: state.loginScreen.authorization,
+    notAuthorized: state.loginScreen.notAuthorized
+})
+
+export default connect(mapStateToProps, actions)(LoginScreen)
