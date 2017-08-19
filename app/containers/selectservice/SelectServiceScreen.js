@@ -1,23 +1,36 @@
 
 import React, { Component } from 'react'
-import { StyleSheet, View, Text, Image, ScrollView } from 'react-native'
+import { StyleSheet, View, Text, Image, ScrollView, Button, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import  * as actions  from './SelectServiceActions'
 import ServiceItem from './components/ServiceItem'
-
+import Modal from 'react-native-modal'
+import SearchProcessDialog from '../searchprocess/SearchProcessDialog'
 
 class SelectServiceScreen extends Component {
+
+  state = {
+    isModalVisible: false
+  }
+
+  _showModal = () => this.setState({ isModalVisible: true })
+
+  _hideModal = () => this.setState({ isModalVisible: false })
+  
   componentDidMount() {
       this.props.loadServices('company-guid-1')
   }
+
+  state = { open: false };
 
   render() {
     const { services } = this.props;
 
     return (
       <View style={styles.servicesContainer}>
+
         <View style={{ width: null, flex: 1, height: 200, margin: 10, backgroundColor: 'grey'}} />
-      
+        
         <View style={styles.servicesMenu}>
           <View style={styles.servicesListRow}>
             <View style={styles.itemContainer}>
@@ -32,12 +45,12 @@ class SelectServiceScreen extends Component {
               />
               <Text>Apreensões</Text>
             </View>
-            <View style={styles.itemContainer}>
-              <Image
-                source={require('../../assets/images/text-file.png')}
-              />
-              <Text>Processos</Text>
-            </View>
+            <TouchableOpacity style={styles.itemContainer} onPress={this._showModal}>
+                <Image
+                  source={require('../../assets/images/text-file.png')}
+                />
+                <Text>Processos</Text>
+            </TouchableOpacity>
           </View>
           <View style={styles.servicesListRow}>
             <View style={styles.itemContainer}>
@@ -60,6 +73,14 @@ class SelectServiceScreen extends Component {
             </View>
           </View>
         </View>
+
+        <Modal isVisible={this.state.isModalVisible}>
+          <View style={styles.searchProcessModal}>
+            <SearchProcessDialog
+
+            />
+          </View>
+        </Modal>
 
         <View style={styles.servicesFooter}>
           <Image
@@ -97,6 +118,10 @@ const styles = {
       flex: 1,
       flexDirection: 'row',
     },
+    searchProcessModal : {
+      backgroundColor: '#ffffff',
+      borderRadius: 5,
+    }
 }
 
 const mapStateToProps = (state) => ({
