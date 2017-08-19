@@ -7,6 +7,8 @@ import ServiceItem from './components/ServiceItem'
 import Modal from 'react-native-modal'
 import SearchProcessDialog from '../searchprocess/SearchProcessDialog'
 
+
+
 class SelectServiceScreen extends Component {
 
   state = {
@@ -77,7 +79,6 @@ class SelectServiceScreen extends Component {
         <Modal isVisible={this.state.isModalVisible}>
           <View style={styles.searchProcessModal}>
             <SearchProcessDialog
-
             />
           </View>
         </Modal>
@@ -127,5 +128,9 @@ const styles = {
 const mapStateToProps = (state) => ({
     services: state.selectServiceScreen.services,
 })
+
+SelectServiceScreen.navigationOptions = {
+  title: 'SelectServiceScreen',
+};
 
 export default connect(mapStateToProps, actions)(SelectServiceScreen)
