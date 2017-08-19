@@ -31,11 +31,8 @@ const requestAuthorizationUser = (user) => {
 }
 const authorize = (request) => {
   return(dispatch) => {
-    console.log('uaheueh')
-
     requestAuthorize(request)
     .then((response) => {
-      console.log(response)
        dispatch(requestAuthorizeAction(response))
     })
     .catch((error) => {

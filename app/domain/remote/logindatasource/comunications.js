@@ -23,8 +23,8 @@ const requestAuthorize = (requestParams) => {
     login: requestParams.login,
     idAutorizacao: requestParams.idAutorizacao,
     tokenApp: '8a1243604c1c2407cce1bb10acf60110028d7c86'
-  }
-  console.log(params)
+  };
+
   return axios({
     method: 'post',
     baseURL: BASE_URL,

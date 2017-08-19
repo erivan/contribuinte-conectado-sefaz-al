@@ -9,26 +9,25 @@ import {
   Linking
 } from 'react-native';
 import { connect } from 'react-redux';
-
-import * as actions from './LoginActions'
+import Realm from 'realm'
+import * as actions from './LoginActions';
+import AuthRepository from './../../domain/local/authenticationdatasource/AuthRepository';
 
 class LoginScreen extends Component {
   constructor(props) {
     super(props)
-    this.state = { login: '', authorization: null, buttonText: 'SOLICITAR AUTORIZAÇÃO', hideInputs: false, error: '', missingFields: false}
+    this.state = { login: '', authorization: null, buttonText: 'SOLICITAR AUTORIZAÇÃO', hideInputs: false, error: '', missingFields: false, authorized: null}
   }
+
 
   requestAuthorization() {
     if(this.state.login === '' ) {
       this.setState({missingFields: true});
       return null;
     }
-
     const login = this.state.login;
     this.setState({missingFields: false});
     if(this.state.hideInputs) {
-      console.log('ahhai')
-      console.log(this.state)
       this.props.authorize({login: login, idAutorizacao: this.state.authorization.data.idAutorizacao})
     }else{
       this.props.requestAuthorizationUser(login)
@@ -37,12 +36,14 @@ class LoginScreen extends Component {
 
   componentWillReceiveProps(nextProps) {
     console.log(nextProps)
-     if (this.props.authorization !== nextProps.authorization) {
-         this.setState({buttonText: 'Confirmar Auteração', hideInputs: true, error: '', authorization: nextProps.authorization })
-     }
-     if (this.props.notAuthorized !== nextProps.notAuthorized) {
-       this.setState({buttonText: 'Confirmar Auteração', hideInputs: true, error:'Certifique-se que você autorizou o nosso aplicativo', authorization: this.state.authorization })
-     }
+    if(nextProps.authorized !== this.props.authorized ) {
+        this.setState({ authorized: nextProps.authorized });
+    } else if (this.props.authorization !== nextProps.authorization) {
+        this.setState({buttonText: 'Confirmar Auteração', hideInputs: true, error: '', authorization: nextProps.authorization })
+    } else if (this.props.notAuthorized !== nextProps.notAuthorized) {
+        this.setState({buttonText: 'Confirmar Auteração', hideInputs: true, error:'Certifique-se que você autorizou o nosso aplicativo', authorization: this.state.authorization })
+    }
+
   }
 
   renderInputs() {
@@ -81,10 +82,19 @@ class LoginScreen extends Component {
               <Text style={{color: 'red', fontWeight: 'bold'}}>{msg}</Text>
               </View>;
     }
+  }
 
+  authorizeUser() {
+    AuthRepository.create( { login:  this.state.login, token: this.state.authorized.data.id_token } )
   }
 
   render() {
+
+    if(this.state.authorized) {
+      this.authorizeUser()
+      return null;
+    }
+
     return (
 
       <View style={{ flex: 1}}>
@@ -136,7 +146,8 @@ const styles = {
 
 const mapStateToProps = (state) => ({
     authorization: state.loginScreen.authorization,
-    notAuthorized: state.loginScreen.notAuthorized
+    notAuthorized: state.loginScreen.notAuthorized,
+    authorized:    state.loginScreen.authorized
 })
 
 export default connect(mapStateToProps, actions)(LoginScreen)
