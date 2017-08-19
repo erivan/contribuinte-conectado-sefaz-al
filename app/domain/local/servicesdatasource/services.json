@@ -2,11 +2,28 @@
   "data": [
     {
       "id": 2,
-      "name": "Service Name 2"
+      "name": "Service Name 2",
+      "imagePath": "'../../../assets/icons/megaphone.png'"
     },
     {
       "id": 1,
-      "name": "Service Name 1"
+      "name": "Service Name 1",
+      "imagePath": "'../../../assets/icons/megaphone.png'"
+    },
+    {
+      "id": 1,
+      "name": "Service Name 1",
+      "imagePath": "'../../../assets/icons/megaphone.png'"
+    },
+    {
+      "id": 1,
+      "name": "Service Name 1",
+      "imagePath": "'../../../assets/icons/megaphone.png'"
+    },
+    {
+      "id": 1,
+      "name": "Service Name 1",
+      "imagePath": "'../../../assets/icons/megaphone.png'"
     }
   ]
 }
