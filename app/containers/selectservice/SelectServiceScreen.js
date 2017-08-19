@@ -6,7 +6,7 @@ import  * as actions  from './SelectServiceActions'
 import ServiceItem from './components/ServiceItem'
 import Modal from 'react-native-modal'
 import SearchProcessDialog from '../searchprocess/SearchProcessDialog'
-
+import { NavigationActions } from 'react-navigation';
 
 
 class SelectServiceScreen extends Component {
@@ -27,6 +27,7 @@ class SelectServiceScreen extends Component {
 
   render() {
     const { services } = this.props;
+    const { navigate } = this.props.nav;
 
     return (
       <View style={styles.servicesContainer}>
@@ -80,6 +81,11 @@ class SelectServiceScreen extends Component {
           <View style={styles.searchProcessModal}>
             <SearchProcessDialog
             />
+            <Button
+              onPress={() =>
+                dispatch(NavigationActions.navigate({ routeName: 'Profile' }))}
+              title="Profile"
+            />
           </View>
         </Modal>
 
@@ -127,6 +133,7 @@ const styles = {
 
 const mapStateToProps = (state) => ({
     services: state.selectServiceScreen.services,
+    navigation: state.nav
 })
 
 SelectServiceScreen.navigationOptions = {
