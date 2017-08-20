@@ -52,7 +52,7 @@ class SelectServiceScreen extends Component {
           <View style={styles.servicesListRow}>
             <View style={styles.itemServiceContainer}>
               <Image
-                source={require('../../assets/images/stopwatch.png')} style={styles.itemServiceItemImage}
+              source={require('../../assets/images/deposit.png')} style={styles.itemServiceItemImage}
               />
               <Text style={styles.itemServiceTitle}>Pendências</Text>
             </View>
@@ -133,9 +133,10 @@ const styles = {
       color: '#0c73f0',
       fontWeight: '500',
       fontSize: 12,
+      marginBottom: 5
     },
     itemServiceItemImage: {
-      marginBottom: 10
+      marginTop: 15
     },
     servicesInfo: {
       padding: 10,
@@ -156,7 +157,7 @@ const styles = {
       color: '#90a5c0',
       fontSize: 12,
       fontWeight: '500',
-      textAlign: 'right'
+      textAlign: 'right',
     },
     itemServiceInfoCaceal: {
       fontSize: 18,
