@@ -35,11 +35,14 @@ class LoginScreen extends Component {
  }
   componentWillReceiveProps(nextProps) {
     if (nextProps.authorized !== this.props.authorized) {
+      console.log(nextProps)
         this.setState({ authorized: nextProps.authorized });
-    } else if (this.props.authorization !== nextProps.authorization) {
+    } else if (this.props.authorization !== nextProps.authorization && nextProps.authorization) {
+      console.log(nextProps)
         this.setState({ buttonText: 'Confirmar Auteração', hideInputs: true, error: '', authorization: nextProps.authorization })
     } else if (this.props.notAuthorized !== nextProps.notAuthorized) {
-        this.setState({ buttonText: 'Confirmar Auteração', hideInputs: true, error: 'Certifique-se que você autorizou o nosso aplicativo', authorization: this.state.authorization })
+      console.log(nextProps)
+        this.setState({ buttonText: 'Confirmar Auteração', hideInputs: true, error: 'Certifique-se que você autorizou o nosso aplicativo'})
     }
   }
 
