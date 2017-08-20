@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from 'axios';
 
 export const BASE_URL = 'http://hackathonapi.sefaz.al.gov.br/'
 
@@ -31,6 +31,7 @@ const requestAuthorize = (requestParams) => {
     url: '/api/public/autenticar',
     timeout: 3000,
     data: params
-  })
-}
-export { requestAuthorization, requestAuthorize }
+  });
+};
+
+export { requestAuthorization, requestAuthorize };
