@@ -4,70 +4,66 @@ import {
   Text,
   TextInput,
   Image,
-  KeyboardAvoidingView,
   TouchableOpacity,
   Linking
 } from 'react-native';
 import { connect } from 'react-redux';
-import Realm from 'realm'
+import Realm from 'realm';
 import * as actions from './LoginActions';
 import AuthRepository from './../../domain/local/authenticationdatasource/AuthRepository';
+import Schemas from './../../domain/local/schema';
 
 class LoginScreen extends Component {
   constructor(props) {
-    super(props)
-    this.state = { login: '', authorization: null, buttonText: 'SOLICITAR AUTORIZAÇÃO', hideInputs: false, error: '', missingFields: false, authorized: null}
+    super(props);
+    this.state = {
+      login: '',
+      authorization: null,
+      buttonText: 'SOLICITAR AUTORIZAÇÃO',
+      hideInputs: false,
+      error: '',
+      missingFields: false,
+      authorized: null,
+      loogedIn: false
+    };
   }
 
+ componentWillMount() {
+   AuthRepository.all().map((user) => (
+     this.setState({ loogedIn: true })
+   ));
+ }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.authorized !== this.props.authorized) {
+        this.setState({ authorized: nextProps.authorized });
+    } else if (this.props.authorization !== nextProps.authorization) {
+        this.setState({ buttonText: 'Confirmar Auteração', hideInputs: true, error: '', authorization: nextProps.authorization })
+    } else if (this.props.notAuthorized !== nextProps.notAuthorized) {
+        this.setState({ buttonText: 'Confirmar Auteração', hideInputs: true, error: 'Certifique-se que você autorizou o nosso aplicativo', authorization: this.state.authorization })
+    }
+  }
 
   requestAuthorization() {
-    if(this.state.login === '' ) {
-      this.setState({missingFields: true});
+    if (this.state.login === '') {
+      this.setState({ missingFields: true });
       return null;
     }
     const login = this.state.login;
-    this.setState({missingFields: false});
-    if(this.state.hideInputs) {
-      this.props.authorize({login: login, idAutorizacao: this.state.authorization.data.idAutorizacao})
-    }else{
-      this.props.requestAuthorizationUser(login)
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps)
-    if(nextProps.authorized !== this.props.authorized ) {
-        this.setState({ authorized: nextProps.authorized });
-    } else if (this.props.authorization !== nextProps.authorization) {
-        this.setState({buttonText: 'Confirmar Auteração', hideInputs: true, error: '', authorization: nextProps.authorization })
-    } else if (this.props.notAuthorized !== nextProps.notAuthorized) {
-        this.setState({buttonText: 'Confirmar Auteração', hideInputs: true, error:'Certifique-se que você autorizou o nosso aplicativo', authorization: this.state.authorization })
-    }
-
-  }
-
-  renderInputs() {
+    this.setState({ missingFields: false });
     if (this.state.hideInputs) {
-      return null;
+      this.props.authorize({ login, idAutorizacao: this.state.authorization.data.idAutorizacao });
+    } else {
+      this.props.requestAuthorizationUser(login);
     }
-
-    return <View>
-    <TextInput
-      underlineColorAndroid='rgba(0,0,0,0)'
-      style={styles.inputLogin}
-      onChangeText={(login) => this.setState({login})}
-      placeholder='Usuário'
-      value={this.state.login}
-    />
-    </View>;
   }
+
 
   openLink() {
     Linking.openURL(this.state.authorization.data.urlAutorizacao)
   }
 
   renderError() {
-    if(!this.state.hideInputs) return null;
+    if (!this.state.hideInputs) return null;
     const msg = this.state.error !== '' ? this.state.error : 'Você deve autorizar nosso aplicativo no site da sefaz, clique para ser redirecionado' ;
     return <View style={{ justifyContent: 'center', alignItems: 'center', height: 50, margin: 20}}>
             <TouchableOpacity onPress={this.openLink.bind(this)}>
@@ -76,7 +72,7 @@ class LoginScreen extends Component {
             </View>;
   }
   requiredFields() {
-    if(this.state.missingFields) {
+    if (this.state.missingFields) {
       const msg = 'O campo usuário é obrigátorio.' ;
       return <View style={{ justifyContent: 'center', alignItems: 'center', height: 50}}>
               <Text style={{color: 'red', fontWeight: 'bold'}}>{msg}</Text>
@@ -85,14 +81,36 @@ class LoginScreen extends Component {
   }
 
   authorizeUser() {
-    AuthRepository.create( { login:  this.state.login, token: this.state.authorized.data.id_token } )
+    AuthRepository.create( { login:  this.state.login, token: this.state.authorized.data.id_token } );
+    this.goToSelectService();
+  }
+  goToSelectService() {
+    this.props.navigation.navigate('SelectServiceScreen');
+  }
+  renderInputs() {
+    if (this.state.hideInputs) {
+      return null;
+    }
+
+    return (<View>
+        <TextInput
+          underlineColorAndroid='rgba(0,0,0,0)'
+          style={styles.inputLogin}
+          onChangeText={(login) => this.setState({login})}
+          placeholder='Usuário'
+          value={this.state.login}
+        />
+    </View>);
   }
 
   render() {
-
-    if(this.state.authorized) {
-      this.authorizeUser()
+    if (this.state.loogedIn) {
+        this.goToSelectService();
       return null;
+    }
+    if (this.state.authorized) {
+        this.authorizeUser()
+        return null;
     }
 
     return (

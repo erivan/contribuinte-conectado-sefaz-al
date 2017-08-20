@@ -1,13 +1,26 @@
 import React from 'react'
-import { Provider } from 'react-redux'
-import { View, Text} from 'react-native'
+import { Provider, connect } from 'react-redux'
+import { View, Text } from 'react-native'
 import Realm from 'realm';
-import store from './app/store'
-import SelectServiceScreen from './app/containers/selectservice/SelectServiceScreen'
-import LoginScreen from './app/containers/login/LoginScreen'
+import { addNavigationHelpers } from 'react-navigation';
+import store from './app/store';
 import Schemas from './app/domain/local/schema'
-import AuthRepository from './app/domain/local/authenticationdatasource/AuthRepository';
+import Navigator from './app/config/routes';
 
+const Nav = ({dispatch, nav}) => {
+  return <Navigator
+            navigation = {addNavigationHelpers({
+              dispatch,
+              state: nav
+            })}
+          />
+}
+
+const mapStateToProps = (state) => ({
+  nav: state.nav
+});
+
+const AppWithNavigation = connect(mapStateToProps)(Nav);
 
 export default class App extends React.Component {
   constructor(props) {
@@ -17,26 +30,16 @@ export default class App extends React.Component {
   componentWillMount() {
     this.realm = Realm.open({ schema: Schemas })
       .then(() => {
-        AuthRepository.all().map((user) => {
-          this.setState({ loogedIn: true })
-        })
         this.setState({ realmLoaded: true });
     });
   }
 
-  renderScreen() {
-    if (this.state.loogedIn) {
-    return <SelectServiceScreen />;
-    }
-    return <LoginScreen />
-  }
   render() {
     if (!this.state.realmLoaded) return null;
-
+    
     return (
       <Provider store={store}>
-        {this.renderScreen()}
-
+        <AppWithNavigation />
       </Provider>
     )
   }
