@@ -18,9 +18,11 @@ const requestAuthorizationUser = (user) => {
       console.log('login')
         requestAuthorization(user)
             .then((response) => {
+              console.log(response)
                 dispatch(requestAuthorizationAction(response))
             })
             .catch((error) => {
+ console.log(error)
                 //   dispatch(loginError('An error occurred. \nCheck your internet connection'))
                 // }
             })
