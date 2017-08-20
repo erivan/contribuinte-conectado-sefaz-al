@@ -28,48 +28,65 @@ class SelectServiceScreen extends Component {
 
     return (
       <View style={styles.servicesContainer}>
+        <View style={styles.servicesInfo}>
+          <View style={styles.servicesInfoRow}>
+            <View style={styles.itemServiceInfoLeft}>
+              <Text style={styles.itemServiceInfoTitle}>CACEAL</Text>
+            </View>
+            <View style={styles.itemServiceInfoRight}>
+              <Text style={styles.itemServiceInfoValue, styles.itemServiceInfoCaceal}>24002198</Text>
+            </View>
+          </View>
 
-        <View style={{ width: null, flex: 1, height: 200, margin: 10, backgroundColor: 'grey'}} />
+          <View style={styles.servicesInfoRow}>
+            <View style={styles.itemServiceInfoLeft}>
+              <Text style={styles.itemServiceInfoTitle}>Nome Fantasia</Text>
+            </View>
+            <View style={styles.itemServiceInfoRight}>
+              <Text style={styles.itemServiceInfoValue}>Hackathon S/A 24002198</Text>
+            </View>
+          </View>
+        </View>
         
         <View style={styles.servicesMenu}>
           <View style={styles.servicesListRow}>
-            <View style={styles.itemContainer}>
+            <View style={styles.itemServiceContainer}>
               <Image
-                source={require('../../assets/images/stopwatch.png')}
+                source={require('../../assets/images/stopwatch.png')} style={styles.itemServiceItemImage}
               />
-              <Text>Pendências</Text>
+              <Text style={styles.itemServiceTitle}>Pendências</Text>
             </View>
-            <View style={styles.itemContainer}>
+            <View style={styles.itemServiceContainer}>
               <Image
-                source={require('../../assets/images/megaphone.png')}
+                source={require('../../assets/images/trolley.png')} style={styles.itemServiceItemImage}
               />
-              <Text>Apreensões</Text>
+              <Text style={styles.itemServiceTitle}>Produtos Retidos</Text>
             </View>
-            <TouchableOpacity style={styles.itemContainer} onPress={this._showModal}>
+            <TouchableOpacity style={styles.itemServiceContainer} onPress={this._showModal}>
                 <Image
-                  source={require('../../assets/images/text-file.png')}
+                source={require('../../assets/images/text-file.png')} style={styles.itemServiceItemImage}
                 />
-                <Text>Processos</Text>
+                <Text style={styles.itemServiceTitle}>Processos</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.servicesListRow}>
-            <View style={styles.itemContainer}>
+            <View style={styles.itemServiceContainer}>
               <Image
-                source={require('../../assets/images/question.png')}
+                source={require('../../assets/images/question.png')} style={styles.itemServiceItemImage}
               />
-              <Text>FAQ</Text>
+              <Text style={styles.itemServiceTitle}>FAQ</Text>
             </View>
-            <View style={styles.itemContainer}>
+            <View style={styles.itemServiceContainer}>
               <Image
-                source={require('../../assets/images/megaphone.png')}
+                source={require('../../assets/images/megaphone.png')} style={styles.itemServiceItemImage}
               />
-              <Text>Denúncia</Text>
+              <Text style={styles.itemServiceTitle}>Denúncia</Text>
             </View>
-            <View style={styles.itemContainer}>
+            <View style={styles.itemServiceContainer}>
               <Image
-                source={require('../../assets/images/operator.png')}
+                source={require('../../assets/images/operator.png')} style={styles.itemServiceItemImage}
               />
-              <Text>Atendimento</Text>
+              <Text style={styles.itemServiceTitle}>Atendimento</Text>
             </View>
           </View>
         </View>
@@ -103,24 +120,65 @@ const styles = {
       flexDirection: 'column',
       backgroundColor: 'white'
     },
-    itemContainer: {
+    itemServiceContainer: {
       flex: 1,
       flexDirection: 'column',
       alignItems: 'center',
+      justifyContent: 'space-between',
       borderWidth: 0.5,
-      borderColor: '#F0F3F6',
-      padding: 20,
+      borderColor: '#f0f3f6',
+      padding: 10,
+    },
+    itemServiceTitle: {
+      color: '#0c73f0',
+      fontWeight: '500',
+      fontSize: 12,
+    },
+    itemServiceItemImage: {
+      marginBottom: 10
+    },
+    servicesInfo: {
+      padding: 10,
+      margin: 10,
+      marginBottom: 30,
+      backgroundColor: '#f0f3f6',
+      borderRadius: 3,
+    },
+    servicesInfoRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    itemServiceInfoLeft: {
+      flex: 1,
+      paddingRight: 10,
+    },
+    itemServiceInfoTitle: {
+      color: '#90a5c0',
+      fontSize: 12,
+      fontWeight: '500',
+      textAlign: 'right'
+    },
+    itemServiceInfoCaceal: {
+      fontSize: 18,
+      fontWeight: '700',
+    },
+    itemServiceInfoRight: {
+      flex: 2,
+    },
+    itemServiceInfoValue: {
+      color: '#2c2c2c'
     },
     servicesMenu: {
       flex: 1,
-      flexDirection: 'column',
+      // flexDirection: 'column',
     },
     servicesListRow: {
       flex: 1,
       flexDirection: 'row',
+      alignItems: 'stretch'
     },
     searchProcessModal : {
-      backgroundColor: '#ffffff',
+      backgroundColor: 'white',
       borderRadius: 5,
     }
 }
