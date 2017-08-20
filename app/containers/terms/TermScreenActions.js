@@ -10,7 +10,7 @@ const fetchTerms = (terms) => {
 export const fetchTermsAction = (identifier) => {
     return (dispatch) => {
 
-        mockTerms(identifier)
+        loadTerms(identifier)
             .then((response) => {
                 dispatch(fetchTerms(response))
             })

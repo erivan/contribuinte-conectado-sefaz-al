@@ -17,7 +17,7 @@ import * as actions from './TermScreenActions';
   goToDetail(name) {
       this.props.navigation.navigate('RetainedMerchandiseScreen', { name });
   }
-  componentDidMount() {
+  componentWillMount() {
       this.props.fetchTermsAction();
   }
   componentWillReceiveProps(nexProps) {
