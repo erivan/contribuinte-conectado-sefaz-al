@@ -159,6 +159,13 @@ const styles = {
       fontWeight: '500',
       textAlign: 'right',
     },
+    itemServiceInfoStatus: {
+      color: 'white',
+      fontSize: 11,
+      fontWeight: '500',
+      textAlign: 'center',
+      background: '#0c73f0'
+    },
     itemServiceInfoCaceal: {
       fontSize: 18,
       fontWeight: '700',

@@ -22,7 +22,7 @@ class RetainedMerchandiseScreen extends Component {
               <View style={styles.descriptionContainer}>
                 <Image
                   style={styles.descriptionIcon}
-                  source={require('../../assets/images/stopwatch.png')}
+                  source={require('../../assets/images/deposit.png')}
                 />
                 <Text style={styles.innerTextStyle}>ONG sem fins lucrativos voltada à habilitação às pessoas com deficiência auditiva e/ou surdez</Text>
               </View>
@@ -32,7 +32,7 @@ class RetainedMerchandiseScreen extends Component {
               <View style={styles.descriptionContainer}>
                 <Image
                   style={styles.descriptionIcon}
-                  source={require('../../assets/images/stopwatch.png')}
+                  source={require('../../assets/images/deposit.png')}
                 />
                 <Text style={styles.innerTextStyle}>ONG sem fins lucrativos voltada à habilitação às pessoas com deficiência auditiva e/ou surdez</Text>
               </View>
@@ -42,7 +42,7 @@ class RetainedMerchandiseScreen extends Component {
               <View style={styles.descriptionContainer}>
                 <Image
                   style={styles.descriptionIcon}
-                  source={require('../../assets/images/stopwatch.png')}
+                  source={require('../../assets/images/deposit.png')}
                 />
                 <Text style={styles.innerTextStyle}>www.sefaz.com.br</Text>
               </View>
