@@ -1,4 +1,4 @@
-import { requestAuthorization, requestAuthorize } from '../../domain/remote/logindatasource/comunications'
+import { requestAuthorization, requestAuthorize } from '../../domain/remote/logindatasource/comunications';
 
 const requestAuthorizationAction = (response) => {
     return {
@@ -15,14 +15,11 @@ const requestAuthorizeAction = (response) => {
 }
 const requestAuthorizationUser = (user) => {
     return (dispatch) => {
-      console.log('login')
         requestAuthorization(user)
             .then((response) => {
-              console.log(response)
                 dispatch(requestAuthorizationAction(response))
             })
             .catch((error) => {
- console.log(error)
                 //   dispatch(loginError('An error occurred. \nCheck your internet connection'))
                 // }
             })
@@ -38,9 +35,9 @@ const authorize = (request) => {
        dispatch(requestAuthorizeAction(response))
     })
     .catch((error) => {
-      console.log(error.message)
       dispatch({type: 'NOT_AUTHORIZED', payload: error})
     })
   }
 }
-export { requestAuthorizationUser, authorize }
+
+export { requestAuthorizationUser, authorize };

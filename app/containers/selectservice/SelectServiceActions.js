@@ -1,4 +1,5 @@
-import { getServices } from '../../domain/local/servicesdatasource/services'
+
+import { getServices, fetchUserInformation } from '../../domain/local/servicesdatasource/services';
 
 const fetchServices = (services) => {
     return {
@@ -7,7 +8,7 @@ const fetchServices = (services) => {
     }
 }
 
-export const loadServices = ({ companyGuid }) => {
+ const loadServices = ({ companyGuid }) => {
     return (dispatch) => {
         getServices(companyGuid)
             .then((response) => {
@@ -22,3 +23,25 @@ export const loadServices = ({ companyGuid }) => {
             })
     }
 }
+const userInformationAction = (response) => {
+    return {
+        type: 'USER_INFORMATION',
+        payload: response,
+    };
+};
+const getUserInformaion = () => (
+  (dispatch) => {
+
+    fetchUserInformation()
+    .then((response) => {
+       dispatch(userInformationAction(response));
+    })
+    .catch((error) => {
+      console.log(error)
+
+      dispatch({ type: 'NOT_AUTHORIZED', payload: error });
+    });
+  }
+);
+
+export { getUserInformaion, loadServices };
