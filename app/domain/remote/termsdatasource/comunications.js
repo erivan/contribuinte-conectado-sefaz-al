@@ -7,6 +7,7 @@ export const BASE_URL = 'http://hackathonapi.sefaz.al.gov.br/'
 
 const loadTerms = (user) => {
   const logedIn = AuthRepository.logedIn();
+
   return axios({
     method: 'post',
     baseURL: BASE_URL,
