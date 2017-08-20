@@ -9,7 +9,7 @@ class SearchProcessDialog extends Component {
         <View style={styles.topContainer}>
           <Image
             style={{width:30, height:30, alignSelf: 'flex-end'}}
-            source={require('../../assets/images/stopwatch.png')}
+            source={require('../../assets/images/deposit.png')}
           />
         </View>
 
@@ -26,7 +26,7 @@ class SearchProcessDialog extends Component {
           <Text style={styles.textButton}>BUSCAR PROCESSO</Text>
           <Image
             style={{ width: 15, height: 15, marginLeft: 10}}
-            source={require('../../assets/images/stopwatch.png')}
+            source={require('../../assets/images/deposit.png')}
           />
         </TouchableOpacity>
       </View>

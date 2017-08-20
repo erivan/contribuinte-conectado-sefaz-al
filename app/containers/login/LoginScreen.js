@@ -35,14 +35,11 @@ class LoginScreen extends Component {
  }
   componentWillReceiveProps(nextProps) {
     if (nextProps.authorized !== this.props.authorized) {
-      console.log(nextProps)
         this.setState({ authorized: nextProps.authorized });
     } else if (this.props.authorization !== nextProps.authorization && nextProps.authorization) {
-      console.log(nextProps)
-        this.setState({ buttonText: 'Confirmar Auteração', hideInputs: true, error: '', authorization: nextProps.authorization })
+        this.setState({ buttonText: 'Entrar', hideInputs: true, error: '', authorization: nextProps.authorization })
     } else if (this.props.notAuthorized !== nextProps.notAuthorized) {
-      console.log(nextProps)
-        this.setState({ buttonText: 'Confirmar Auteração', hideInputs: true, error: 'Certifique-se que você autorizou o nosso aplicativo'})
+        this.setState({ buttonText: 'Entrar', hideInputs: true, error: 'Certifique-se que você autorizou o nosso aplicativo'})
     }
   }
 
@@ -118,7 +115,7 @@ class LoginScreen extends Component {
 
     return (
 
-      <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
+      <View style={{ flex: 1, backgroundColor: 'white' }}>
         <View style={{ marginBottom: 20, marginTop: 1, flex: 1, position: 'relative' }}>
         <Image
             style={{ height: 250, width: null }}

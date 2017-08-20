@@ -15,7 +15,10 @@ export default StackNavigator({
   SelectServiceScreen: {
     screen: SelectServiceScreen,
     navigationOptions: {
-      header: () => null
+      title: 'Serviços',
+      headerLeft: null,
+      headerStyle: { backgroundColor: 'white' },
+      headerTitleStyle: { color: '#0c73f0' }
     }
   },
   ShowProcessScreen: {
