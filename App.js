@@ -1,10 +1,6 @@
 import React from 'react';
-import { View, Text} from 'react-native';
 import store from './app/store';
-import SelectServiceScreen from './app/containers/selectservice/SelectServiceScreen';
-import LoginScreen from './app/containers/login/LoginScreen';
 import Schemas from './app/domain/local/schema';
-import AuthRepository from './app/domain/local/authenticationdatasource/AuthRepository';
 import { Provider, connect } from 'react-redux';
 import Realm from 'realm';
 import { addNavigationHelpers } from 'react-navigation';
