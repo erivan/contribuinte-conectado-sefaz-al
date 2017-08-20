@@ -67,15 +67,15 @@ class LoginScreen extends Component {
     const msg = this.state.error !== '' ? this.state.error : 'Você deve autorizar nosso aplicativo no site da sefaz, clique para ser redirecionado' ;
     return <View style={{ justifyContent: 'center', alignItems: 'center', height: 50, margin: 20}}>
             <TouchableOpacity onPress={this.openLink.bind(this)}>
-            <Text style={{color: 'red', fontWeight: 'bold'}}>{msg}</Text>
-             </TouchableOpacity>
+                <Text style={{color: 'red', fontWeight: 'bold'}}>{msg}</Text>
+              </TouchableOpacity>
             </View>;
   }
   requiredFields() {
     if (this.state.missingFields) {
       const msg = 'O campo usuário é obrigátorio.' ;
       return <View style={{ justifyContent: 'center', alignItems: 'center', height: 50}}>
-              <Text style={{color: 'red', fontWeight: 'bold'}}>{msg}</Text>
+                <Text style={{color: 'red', fontWeight: 'bold'}}>{msg}</Text>
               </View>;
     }
   }
@@ -115,14 +115,14 @@ class LoginScreen extends Component {
 
     return (
 
-      <View style={{ flex: 1}}>
-        <View style={{ marginBottom: 20, marginTop: 1, flex: 1, position: 'relative'}}>
+      <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
+        <View style={{ marginBottom: 20, marginTop: 1, flex: 1, position: 'relative' }}>
         <Image
-            style={{height: 238, width: null, resizeMode: 'stretch'}}
+            style={{ height: 250, width: null }}
             source={require('./assets/logo.png')}/>
         </View>
 
-      <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, padding: 20 }}>
           {this.renderInputs()}
           <TouchableOpacity style={styles.LoginButton} onPress={this.requestAuthorization.bind(this)}>
             <Text style={styles.buttonText}>{this.state.buttonText}</Text>
@@ -138,11 +138,11 @@ class LoginScreen extends Component {
 const styles = {
   inputLogin: {
     height: 50,
-    borderColor: '#0073FF',
+    borderColor: '#C2CEDC',
     borderWidth: 0.5,
     margin: 5,
-    borderRadius: 20,
-    paddingLeft:30
+    borderRadius: 50,
+    paddingLeft: 30
   },
   LoginButton: {
     backgroundColor: '#0073FF',
@@ -150,7 +150,7 @@ const styles = {
     alignItems: 'center',
     justifyContent:'center',
     borderColor: 'gray',
-    borderWidth: 1,
+    borderWidth: 0,
     borderRadius: 4,
     margin: 5,
     padding: 5
