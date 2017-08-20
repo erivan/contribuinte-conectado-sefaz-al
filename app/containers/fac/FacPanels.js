@@ -23,7 +23,7 @@ const questions = [
 class FacPanels extends Component {
 
   goToAnswer(question) {
-    this.props.navigation.navigate('FacAnswer', {name:'nome'});
+    this.props.navigation.navigate('FacAnswer', {question});
   };
 
   renderQuestions() {

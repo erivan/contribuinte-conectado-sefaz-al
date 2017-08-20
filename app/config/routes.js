@@ -4,8 +4,8 @@ import SelectServiceScreen from '../containers/selectservice/SelectServiceScreen
 import ShowProcessScreen from '../containers/showprocessscreen/ShowProcessScreen';
 import TermScreen from '../containers/terms/TermScreen';
 import RetainedMerchandiseScreen from '../containers/retainedmerchandise/RetainedMerchandiseScreen';
-import FacScreen from '../containers/fac/FacPanels';
 import FacAnswer from '../containers/fac/FacAnswer';
+import FacScreen from '../containers/fac/FacPanels';
 
 export default StackNavigator({
   LoginScreen: {
@@ -41,16 +41,16 @@ export default StackNavigator({
       headerTitle: 'Detalhe do produto',
     }
   },
-  FacScreen: {
-    screen: FacScreen,
-    navigationOptions: {
-      headerTitle: 'FAC',
-    }
-  },
   FacAnswer: {
     screen: FacAnswer,
     navigationOptions: {
       headerTitle: 'Respostas',
+    }
+  },
+  FacScreen: {
+    screen: FacScreen,
+    navigationOptions: {
+      headerTitle: 'FAC',
     }
   }
 }
