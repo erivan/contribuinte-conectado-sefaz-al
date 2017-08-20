@@ -115,7 +115,7 @@ class LoginScreen extends Component {
 
     return (
 
-      <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
+      <View style={{ flex: 1, backgroundColor: 'white' }}>
         <View style={{ marginBottom: 20, marginTop: 1, flex: 1, position: 'relative' }}>
         <Image
             style={{ height: 250, width: null }}
