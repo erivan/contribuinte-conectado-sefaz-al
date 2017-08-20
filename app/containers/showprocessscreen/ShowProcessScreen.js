@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import moment from 'moment'
 import { StyleSheet, View, Text, Image, TouchableOpacity, TextInput} from 'react-native'
 
 const process = {
@@ -60,12 +61,12 @@ class ShowProcessScreen extends Component {
 
           <View style={styles.formDataContent}>
             <View style={styles.formDataTitleContainer}><Text style={styles.formDataTitle}>Última Movimentação</Text></View>
-            <Text style={styles.formStatusText}>{process.ultimaMovimentacao}</Text>
+            <Text style={styles.formStatusText}>{moment(process.ultimaMovimentacao).calendar()} às {moment(process.ultimaMovimentacao).format('LT')} </Text>
           </View>
 
           <View style={styles.formDataContent}>
             <View style={styles.formDataTitleContainer}><Text style={styles.formDataTitle}>Data de Acabamento</Text></View>
-            <Text style={styles.formStatusText}>{process.dataAcatamento}</Text>
+            <Text style={styles.formStatusText}>{moment(process.dataAcatamento).calendar()} às {moment(process.dataAcatamento).format('LT')} </Text>
           </View>
 
           <View style={styles.formDataContentVertical}>
