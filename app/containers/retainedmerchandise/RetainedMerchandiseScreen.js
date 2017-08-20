@@ -4,13 +4,14 @@ import { StyleSheet, View, Text, Image, ScrollView, TextInput, MapView } from 'r
 class RetainedMerchandiseScreen extends Component {
 
   render() {
+     const {state} = this.props.navigation;
     return (
       <View>
         <Image
           style={{ width: null, height: 300, }}
           source={require('../../assets/images/maps.jpg')}
         />
-        <Text style={styles.placeNameStyle}>NOME DO LOCAL QUE ESTÁ APREENDIDO A MERCADORIA</Text>
+        <Text style={styles.placeNameStyle}>{state.params.name}</Text>
         <ScrollView style={styles.container}>
           <View>
             <View style={styles.infoContainer}>
@@ -22,7 +23,7 @@ class RetainedMerchandiseScreen extends Component {
               <View style={styles.descriptionContainer}>
                 <Image
                   style={styles.descriptionIcon}
-                  source={require('../../assets/images/stopwatch.png')}
+                  source={require('../../assets/images/deposit.png')}
                 />
                 <Text style={styles.innerTextStyle}>ONG sem fins lucrativos voltada à habilitação às pessoas com deficiência auditiva e/ou surdez</Text>
               </View>
@@ -32,7 +33,7 @@ class RetainedMerchandiseScreen extends Component {
               <View style={styles.descriptionContainer}>
                 <Image
                   style={styles.descriptionIcon}
-                  source={require('../../assets/images/stopwatch.png')}
+                  source={require('../../assets/images/deposit.png')}
                 />
                 <Text style={styles.innerTextStyle}>ONG sem fins lucrativos voltada à habilitação às pessoas com deficiência auditiva e/ou surdez</Text>
               </View>
@@ -42,7 +43,7 @@ class RetainedMerchandiseScreen extends Component {
               <View style={styles.descriptionContainer}>
                 <Image
                   style={styles.descriptionIcon}
-                  source={require('../../assets/images/stopwatch.png')}
+                  source={require('../../assets/images/deposit.png')}
                 />
                 <Text style={styles.innerTextStyle}>www.sefaz.com.br</Text>
               </View>
