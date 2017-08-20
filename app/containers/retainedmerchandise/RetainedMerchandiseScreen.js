@@ -4,13 +4,14 @@ import { StyleSheet, View, Text, Image, ScrollView, TextInput, MapView } from 'r
 class RetainedMerchandiseScreen extends Component {
 
   render() {
+     const {state} = this.props.navigation;
     return (
       <View>
         <Image
           style={{ width: null, height: 300, }}
           source={require('../../assets/images/maps.jpg')}
         />
-        <Text style={styles.placeNameStyle}>NOME DO LOCAL QUE ESTÁ APREENDIDO A MERCADORIA</Text>
+        <Text style={styles.placeNameStyle}>{state.params.name}</Text>
         <ScrollView style={styles.container}>
           <View>
             <View style={styles.infoContainer}>

@@ -16,13 +16,16 @@ class SelectServiceScreen extends Component {
   _showModal = () => this.setState({ isModalVisible: true })
 
   _hideModal = () => this.setState({ isModalVisible: false })
-  
+
   componentDidMount() {
       this.props.loadServices('company-guid-1')
   }
 
   state = { open: false };
 
+  goToTerms() {
+    this.props.navigation.navigate('TermScreen');
+  }
   render() {
     const { services } = this.props;
 
@@ -30,7 +33,7 @@ class SelectServiceScreen extends Component {
       <View style={styles.servicesContainer}>
 
         <View style={{ width: null, flex: 1, height: 200, margin: 10, backgroundColor: 'grey'}} />
-        
+
         <View style={styles.servicesMenu}>
           <View style={styles.servicesListRow}>
             <View style={styles.itemContainer}>
@@ -40,10 +43,12 @@ class SelectServiceScreen extends Component {
               <Text>Pendências</Text>
             </View>
             <View style={styles.itemContainer}>
+              <TouchableOpacity onPress={this.goToTerms.bind(this)}>
               <Image
                 source={require('../../assets/images/megaphone.png')}
               />
               <Text>Apreensões</Text>
+              </TouchableOpacity>
             </View>
             <TouchableOpacity style={styles.itemContainer} onPress={this._showModal}>
                 <Image
