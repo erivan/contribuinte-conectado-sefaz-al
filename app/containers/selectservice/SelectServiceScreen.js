@@ -1,27 +1,36 @@
-
-import React, { Component } from 'react'
-import { StyleSheet, View, Text, Image, ScrollView, Button, TouchableOpacity } from 'react-native'
-import { connect } from 'react-redux'
-import  * as actions  from './SelectServiceActions'
-import ServiceItem from './components/ServiceItem'
-import Modal from 'react-native-modal'
-import SearchProcessDialog from '../searchprocess/SearchProcessDialog'
+import React, { Component } from 'react';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
+import AuthRepository from './../../domain/local/authenticationdatasource/AuthRepository';
+import  * as actions  from './SelectServiceActions';
+import ServiceItem from './components/ServiceItem';
+import Modal from 'react-native-modal';
+import SearchProcessDialog from '../searchprocess/SearchProcessDialog';
 
 class SelectServiceScreen extends Component {
 
-  state = {
-    isModalVisible: false
+  constructor(props) {
+    super(props);
+    this.logedIn = AuthRepository.logedIn();
+    this.state = { isModalVisible: false, open: false, userDetail: null }
   }
+
 
   _showModal = () => this.setState({ isModalVisible: true })
 
   _hideModal = () => this.setState({ isModalVisible: false })
 
-  componentDidMount() {
-      this.props.loadServices('company-guid-1')
+  componentWillMount() {
+    // this.props.loadServices('company-guid-1');
+    this.props.getUserInformaion();
   }
 
-  state = { open: false };
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.userDetail !== this.props.userDetail) {
+      console.log(nextProps.userDetail)
+      this.setState({ userDetail: nextProps.userDetail.data })
+    }
+  }
 
   goToTerms() {
     this.props.navigation.navigate('TermScreen');
@@ -32,6 +41,13 @@ class SelectServiceScreen extends Component {
   goToArrecadacoes() {
     this.props.navigation.navigate('ArrecadacoesScreen');
   }
+
+  renderFantasia() {
+    if (this.state.userDetail){
+      return <Text style={styles.itemServiceInfoValue}>{this.state.userDetail.nomeFantasia}</Text>;
+    }
+  }
+  
   render() {
     const { services, navigation } = this.props;
 
@@ -43,20 +59,21 @@ class SelectServiceScreen extends Component {
               <Text style={styles.itemServiceInfoTitle}>CACEAL</Text>
             </View>
             <View style={styles.itemServiceInfoRight}>
-              <Text style={styles.itemServiceInfoValue, styles.itemServiceInfoCaceal}>24002198</Text>
+              <Text style={styles.itemServiceInfoValue, styles.itemServiceInfoCaceal}>{this.logedIn.login}</Text>
             </View>
           </View>
 
           <View style={styles.servicesInfoRow}>
             <View style={styles.itemServiceInfoLeft}>
-              <Text style={styles.itemServiceInfoTitle}>Nome Fantasia</Text>
+              <Text style={styles.itemServiceInfoValue}>Nome Fantasia</Text>
+
             </View>
             <View style={styles.itemServiceInfoRight}>
-              <Text style={styles.itemServiceInfoValue}>Hackathon S/A 24002198</Text>
+              {this.renderFantasia()}
             </View>
           </View>
         </View>
-        
+
         <View style={styles.servicesMenu}>
           <View style={styles.servicesListRow}>
             <TouchableOpacity style={styles.itemServiceContainer} onPress={this.goToArrecadacoes.bind(this)}>
@@ -65,14 +82,13 @@ class SelectServiceScreen extends Component {
                 />
                 <Text style={styles.itemServiceTitle}>Pendências</Text>
             </TouchableOpacity>
-            <View style={styles.itemServiceContainer}>
-              <TouchableOpacity onPress={this.goToTerms.bind(this)}>
-              <Image
-                source={require('../../assets/images/trolley.png')} style={styles.itemServiceItemImage}
-              />
-              <Text style={styles.itemServiceTitle}>Apreensões</Text>
-              </TouchableOpacity>
-            </View>
+            <TouchableOpacity onPress={this.goToTerms.bind(this)}>
+            <Image
+              source={require('../../assets/images/trolley.png')} style={styles.itemServiceItemImage}
+            />
+            <Text style={styles.itemServiceTitle}>Apreensões</Text>
+            </TouchableOpacity>
+          
             <TouchableOpacity style={styles.itemServiceContainer} onPress={this.goToProcess.bind(this)}>
               <Image
               source={require('../../assets/images/text-file.png')} style={styles.itemServiceItemImage}
@@ -116,7 +132,7 @@ class SelectServiceScreen extends Component {
           />
         </View>
       </View>
-    )
+    );
   }
 }
 
@@ -204,6 +220,7 @@ const styles = {
 
 const mapStateToProps = (state) => ({
     services: state.selectServiceScreen.services,
-})
+    userDetail: state.selectServiceScreen.userDetail
+});
 
 export default connect(mapStateToProps, actions)(SelectServiceScreen)

@@ -18,8 +18,8 @@ export default StackNavigator({
     navigationOptions: {
       title: 'Serviços',
       headerLeft: null,
-      headerStyle: { backgroundColor: 'white' },
-      headerTitleStyle: { color: '#0c73f0' }
+      headerStyle: { backgroundColor: '#fff' },
+      headerTitleStyle: { color: '#0c73f0', alignSelf: 'center' }
     }
   },
   ShowProcessScreen: {
@@ -31,13 +31,19 @@ export default StackNavigator({
   TermScreen: {
     screen: TermScreen,
     navigationOptions: {
+      headerTintColor: 'white',
+      headerStyle: { backgroundColor: '#0c73f0' },
+      headerTitleStyle: { color: 'white' },
       headerTitle: 'Produtos Retidos',
     }
   },
   RetainedMerchandiseScreen: {
     screen: RetainedMerchandiseScreen,
     navigationOptions: {
+      headerTintColor: 'white',
       headerTitle: 'Detalhe do produto',
+      headerStyle: { backgroundColor: '#0c73f0' },
+      headerTitleStyle: { color: 'white' }
     }
   },
   ArrecadacoesScreen: {

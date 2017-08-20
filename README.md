@@ -2,7 +2,14 @@
 
 Contribuinte conectado é uma aplicação voltada para os contribuintes do estado de alagoas com o objetivo de reduzir a burocaria na resolução de alguns problemas e facilitar a relação entrea SEFAZ-AL e o contribuinte.
 
+[Documentação do projeto](https://github.com/erivan/contribuinte-conectado-sefaz-al/blob/master/Documentacao_final.pdf)
+
 ## Insalação do projeto
+
+Certifique-se de ter o ambiente para desenvolvimento nativo configurado.
+
+Configuração de Java para Android e Xcode para Ios
+
 Para buildar o contribuinte conectado é necessário instalar algumas depências
 
 1: Instalar [nodeJS](https://nodejs.org/en/), versão requerida para funcionamento da aplicação v6.11.2.
