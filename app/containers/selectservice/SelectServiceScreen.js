@@ -29,6 +29,9 @@ class SelectServiceScreen extends Component {
   goToProcess() {
     this.props.navigation.navigate('ShowProcessScreen');
   }
+  goToArrecadacoes() {
+    this.props.navigation.navigate('ArrecadacoesScreen');
+  }
   render() {
     const { services, navigation } = this.props;
 
@@ -56,12 +59,12 @@ class SelectServiceScreen extends Component {
         
         <View style={styles.servicesMenu}>
           <View style={styles.servicesListRow}>
-            <View style={styles.itemServiceContainer}>
-              <Image
-              source={require('../../assets/images/deposit.png')} style={styles.itemServiceItemImage}
-              />
-              <Text style={styles.itemServiceTitle}>Pendências</Text>
-            </View>
+            <TouchableOpacity style={styles.itemServiceContainer} onPress={this.goToArrecadacoes.bind(this)}>
+                <Image
+                source={require('../../assets/images/deposit.png')} style={styles.itemServiceItemImage}
+                />
+                <Text style={styles.itemServiceTitle}>Pendências</Text>
+            </TouchableOpacity>
             <View style={styles.itemServiceContainer}>
               <TouchableOpacity onPress={this.goToTerms.bind(this)}>
               <Image
