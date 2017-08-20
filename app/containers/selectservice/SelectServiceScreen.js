@@ -101,6 +101,7 @@ const styles = {
     servicesContainer: {
       flex: 1,
       flexDirection: 'column',
+      backgroundColor: 'white'
     },
     itemContainer: {
       flex: 1,
