@@ -16,15 +16,21 @@ class SelectServiceScreen extends Component {
   _showModal = () => this.setState({ isModalVisible: true })
 
   _hideModal = () => this.setState({ isModalVisible: false })
-  
+
   componentDidMount() {
       this.props.loadServices('company-guid-1')
   }
 
   state = { open: false };
 
+  goToTerms() {
+    this.props.navigation.navigate('TermScreen');
+  }
+  goToProcess() {
+    this.props.navigation.navigate('ShowProcessScreen');
+  }
   render() {
-    const { services } = this.props;
+    const { services, navigation } = this.props;
 
     return (
       <View style={styles.servicesContainer}>
@@ -57,16 +63,18 @@ class SelectServiceScreen extends Component {
               <Text style={styles.itemServiceTitle}>Pendências</Text>
             </View>
             <View style={styles.itemServiceContainer}>
+              <TouchableOpacity onPress={this.goToTerms.bind(this)}>
               <Image
                 source={require('../../assets/images/trolley.png')} style={styles.itemServiceItemImage}
               />
-              <Text style={styles.itemServiceTitle}>Produtos Retidos</Text>
+              <Text style={styles.itemServiceTitle}>Apreensões</Text>
+              </TouchableOpacity>
             </View>
-            <TouchableOpacity style={styles.itemServiceContainer} onPress={this._showModal}>
-                <Image
-                source={require('../../assets/images/text-file.png')} style={styles.itemServiceItemImage}
-                />
-                <Text style={styles.itemServiceTitle}>Processos</Text>
+            <TouchableOpacity style={styles.itemServiceContainer} onPress={this.goToProcess.bind(this)}>
+              <Image
+              source={require('../../assets/images/text-file.png')} style={styles.itemServiceItemImage}
+              />
+              <Text style={styles.itemServiceTitle}>Processos</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.servicesListRow}>

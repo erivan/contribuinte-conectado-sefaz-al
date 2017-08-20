@@ -15,6 +15,9 @@ const AuthRepository = {
       repo.create(table, data);
     })
   },
+  logedIn: () => {
+    return repo.objects(table)[0];
+  }
 }
 
 export default AuthRepository;
