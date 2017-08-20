@@ -24,7 +24,7 @@ class SelectServiceScreen extends Component {
   state = { open: false };
 
   render() {
-    const { services } = this.props;
+    const { services, navigation } = this.props;
 
     return (
       <View style={styles.servicesContainer}>
@@ -45,7 +45,7 @@ class SelectServiceScreen extends Component {
               />
               <Text>Apreensões</Text>
             </View>
-            <TouchableOpacity style={styles.itemContainer} onPress={this._showModal}>
+            <TouchableOpacity style={styles.itemContainer} onPress={navigation.navigate('ShowProcessScreen')}>
                 <Image
                   source={require('../../assets/images/text-file.png')}
                 />
