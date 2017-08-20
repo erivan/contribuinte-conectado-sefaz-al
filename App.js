@@ -1,13 +1,14 @@
-import React from 'react'
-import { Provider } from 'react-redux'
-import { View, Text} from 'react-native'
+import React from 'react';
+import { Provider } from 'react-redux';
+import { View, Text} from 'react-native';
 import Realm from 'realm';
-import store from './app/store'
-import SelectServiceScreen from './app/containers/selectservice/SelectServiceScreen'
-import LoginScreen from './app/containers/login/LoginScreen'
-import Schemas from './app/domain/local/schema'
+import store from './app/store';
+import SelectServiceScreen from './app/containers/selectservice/SelectServiceScreen';
+import LoginScreen from './app/containers/login/LoginScreen';
+import Schemas from './app/domain/local/schema';
 import AuthRepository from './app/domain/local/authenticationdatasource/AuthRepository';
 
+import FacPanels from './app/containers/fac/FacPanels';
 
 export default class App extends React.Component {
   constructor(props) {
