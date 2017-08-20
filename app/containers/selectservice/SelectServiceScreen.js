@@ -38,13 +38,16 @@ class SelectServiceScreen extends Component {
   goToProcess() {
     this.props.navigation.navigate('ShowProcessScreen');
   }
+  goToArrecadacoes() {
+    this.props.navigation.navigate('ArrecadacoesScreen');
+  }
+
   renderFantasia() {
     if (this.state.userDetail){
       return <Text style={styles.itemServiceInfoValue}>{this.state.userDetail.nomeFantasia}</Text>;
     }
-
-
   }
+  
   render() {
     const { services, navigation } = this.props;
 
@@ -73,20 +76,19 @@ class SelectServiceScreen extends Component {
 
         <View style={styles.servicesMenu}>
           <View style={styles.servicesListRow}>
-            <View style={styles.itemServiceContainer}>
-              <Image
-              source={require('../../assets/images/deposit.png')} style={styles.itemServiceItemImage}
-              />
-              <Text style={styles.itemServiceTitle}>Pendências</Text>
-            </View>
-
-              <TouchableOpacity style={styles.itemServiceContainer} onPress={this.goToTerms.bind(this)}>
-              <Image
-                source={require('../../assets/images/trolley.png')} style={styles.itemServiceItemImage}
-              />
-              <Text style={styles.itemServiceTitle}>Apreensões</Text>
-              </TouchableOpacity>
-
+            <TouchableOpacity style={styles.itemServiceContainer} onPress={this.goToArrecadacoes.bind(this)}>
+                <Image
+                source={require('../../assets/images/deposit.png')} style={styles.itemServiceItemImage}
+                />
+                <Text style={styles.itemServiceTitle}>Pendências</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={this.goToTerms.bind(this)}>
+            <Image
+              source={require('../../assets/images/trolley.png')} style={styles.itemServiceItemImage}
+            />
+            <Text style={styles.itemServiceTitle}>Apreensões</Text>
+            </TouchableOpacity>
+          
             <TouchableOpacity style={styles.itemServiceContainer} onPress={this.goToProcess.bind(this)}>
               <Image
               source={require('../../assets/images/text-file.png')} style={styles.itemServiceItemImage}
@@ -130,7 +132,7 @@ class SelectServiceScreen extends Component {
           />
         </View>
       </View>
-    )
+    );
   }
 }
 

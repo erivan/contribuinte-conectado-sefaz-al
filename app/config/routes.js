@@ -4,6 +4,7 @@ import SelectServiceScreen from '../containers/selectservice/SelectServiceScreen
 import ShowProcessScreen from '../containers/showprocessscreen/ShowProcessScreen';
 import TermScreen from '../containers/terms/TermScreen';
 import RetainedMerchandiseScreen from '../containers/retainedmerchandise/RetainedMerchandiseScreen';
+import ArrecadacoesScreen from '../containers/arrecadacoes/ArrecadacoesScreen';
 
 export default StackNavigator({
   LoginScreen: {
@@ -43,6 +44,12 @@ export default StackNavigator({
       headerTitle: 'Detalhe do produto',
       headerStyle: { backgroundColor: '#0c73f0' },
       headerTitleStyle: { color: 'white' }
+    }
+  },
+  ArrecadacoesScreen: {
+    screen: ArrecadacoesScreen,
+    navigationOptions: {
+      headerTitle: 'Arrecadações',
     }
   }
 }

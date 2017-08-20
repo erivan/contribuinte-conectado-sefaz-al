@@ -1,18 +1,39 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Text, Image, ScrollView, TextInput, MapView } from 'react-native'
+import ArrecadacaoCard from './components/ArrecadacaoCard'
+
+const arrecadacoes = [
+  { 
+    "date": "2011-11-16T20:19:16.000+0000", 
+    "status": "Pendente" 
+  },
+  { 
+    "date": "2011-11-16T20:19:16.000+0000", 
+    "status": "Parado" 
+  }, 
+  {
+    "date": "2011-11-16T20:19:16.000+0000",
+    "status": "Pago"
+  },
+]
 
 class ArrecadacoesScreen extends Component {
 
   render() {
     return (
       <View style={styles.container}>
-        <View>
-          <Text>Pendente</Text>
-        </View>
-        <View>
-           <Text>12/07/2033</Text>
-        </View>
-        <Text>ArrecadacoesScreen</Text>
+        <ScrollView style={{ padding: 20 }}>
+
+        {arrecadacoes.map((item, index) => (
+          <ArrecadacaoCard
+            key={index}
+            date={item.date}
+            status={item.status}
+          />
+        ))}
+
+        </ScrollView>
+
       </View>
     )
   }
@@ -20,10 +41,26 @@ class ArrecadacoesScreen extends Component {
 
 const styles = {
   container: {
-    flex: 1,
+    flexDirection: 'row',
     backgroundColor: 'white',
-    padding: 20,
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',   
   },
+  statusItem: {
+    backgroundColor: '#fb9917',
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+  topLeft: {
+    backgroundColor: '#fb9917',
+  },
+  topRight: {
+    alignSelf: 'flex-end'
+  },
+  arrecadacaoCard: {
+    flex: 1,
+    flexDirection: 'row'
+  }
 }
 
 export default ArrecadacoesScreen
